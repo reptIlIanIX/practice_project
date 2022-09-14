@@ -13,10 +13,18 @@ def load_candidates_from_json(path):
     return path
 
 
+def get_candidate(candidate_id):
+    for item in data:
+        if candidate_id == item['id']:
+            candidate_id += 1
+    return item['name']
+
+
 @app.route('/')
 def hello():
     items = []
     items = load_candidates_from_json(items)
+
     return render_template('list.html', items=items)
 
 
