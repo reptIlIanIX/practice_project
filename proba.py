@@ -1,11 +1,18 @@
-a = 1
-b = 2
-c = 3
+import logging
+import json
+from json import JSONDecodeError
 
-a = 4
-b = 5
-c = 6
+logging.basicConfig(filename="basic.log")
 
-del a
-del b
-del c
+try:
+    path = "data.json"
+    file = open(path)
+    items = json.load(file)
+    for item in items:
+        print(item)
+except FileNotFoundError:
+    logging.exception("Ошибка доступа к файлу")
+
+except JSONDecodeError:
+    # Будет выполнено если файл найден, но не превращается из JSON
+    logging.exception("Файл не удается преобразовать")
